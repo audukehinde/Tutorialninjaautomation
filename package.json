@@ -1,0 +1,14 @@
+{
+  "name": "saucedemo",
+  "version": "1.0.0",
+  "description": "This is an accessment ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kehinde Audu",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.13.0"
+  }
+}
