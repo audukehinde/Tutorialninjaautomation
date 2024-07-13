@@ -8,13 +8,44 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
-//
+let sel
+let credentials
+ before(() => {
+    cy.on('uncaught:exception', () => {
+        return false
+    })
+    cy.fixture('selector').then((data) => {
+        sel = data
+    })
+}) 
+
+beforeEach(() => {
+    cy.visit('/');
+    cy.fixture('credentials').then((creds) => {
+        credentials = creds;
+    });
+})
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('userLogin', () => {
+    cy.ClickElement(sel.account_button);
+    cy.get(sel.login_button).should('exist').and('be.visible').contains('Login').click();
+    cy.Inputelement(sel.emailField, credentials.email);
+    cy.Inputelement(sel.passwordField, credentials.password);
+    cy.ClickElement(sel.submit);
+    cy.url().should('include', '/account');
+})
+
+
 //
 //
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+// -- This is a click action --
+Cypress.Commands.add('ClickElement',(ele) => {
+    cy.get(ele).should('exist').and('be.visible').click();
+})
+
+Cypress.Commands.add('Inputelement',(ele, data) => {
+    cy.get(ele).should('exist').and('be.visible').fill(data)
+})
 //
 //
 // -- This is a dual command --

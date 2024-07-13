@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.13.0"
+  },
+  "devDependencies": {
+    "cypress-fill-command": "^1.0.2"
   }
 }

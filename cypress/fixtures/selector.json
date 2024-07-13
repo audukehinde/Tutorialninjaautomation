@@ -1,0 +1,7 @@
+{
+    "emailField": "#input-email",
+    "passwordField": "#input-password",
+    "submit": "[type='submit']",
+    "account_button": ".fa-user",
+    "login_button": ".dropdown-menu-right"
+}
