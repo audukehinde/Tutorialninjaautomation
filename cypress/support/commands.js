@@ -1,13 +1,4 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
+
 let sel
 let credentials
  before(() => {
@@ -25,32 +16,56 @@ beforeEach(() => {
         credentials = creds;
     });
 })
-// -- This is a parent command --
-Cypress.Commands.add('userLogin', () => {
+
+// -- Valid login method  --
+Cypress.Commands.add('userValidLogin', () => {
     cy.ClickElement(sel.account_button);
     cy.get(sel.login_button).should('exist').and('be.visible').contains('Login').click();
-    cy.Inputelement(sel.emailField, credentials.email);
-    cy.Inputelement(sel.passwordField, credentials.password);
+    cy.Inputelement(sel.emailField, credentials.validLogin.email);
+    cy.Inputelement(sel.passwordField, credentials.validLogin.password);
     cy.ClickElement(sel.submit);
-    cy.url().should('include', '/account');
+    cy.verifyUrlContains('/account');
+    cy.logout();
 })
 
+// -- Invalid login method. Email is invalid and password is invalid  --
+Cypress.Commands.add('userInvalidLogin', () => {
+    cy.ClickElement(sel.account_button);
+    cy.get(sel.login_button).should('exist').and('be.visible').contains('Login').click();
+    cy.Inputelement(sel.emailField, credentials.invalidLogin.email);
+    cy.Inputelement(sel.passwordField, credentials.invalidLogin.password);
+    cy.ClickElement(sel.submit);
+    cy.verifyUrlContains('/login');
+})
 
-//
-//
-// -- This is a click action --
+// -- User clicks on the Login Button with empty fields --
+Cypress.Commands.add('userEmptyLogin', () => {
+    cy.ClickElement(sel.account_button);
+    cy.get(sel.login_button).should('exist').and('be.visible').contains('Login').click();
+    cy.Inputelement(sel.emailField, '');
+    cy.Inputelement(sel.passwordField, '');
+    cy.ClickElement(sel.submit);
+    cy.verifyUrlContains('/login');
+})
+
+// -- Logout Method --
+Cypress.Commands.add('logout', () => {
+    cy.contains('Logout').click({force: true});
+    cy.verifyUrlContains('/logout');
+})
+
+// -- This method clicks any button on the UI --
 Cypress.Commands.add('ClickElement',(ele) => {
     cy.get(ele).should('exist').and('be.visible').click();
 })
 
+// -- This method inputs data into any textbox on the UI --
 Cypress.Commands.add('Inputelement',(ele, data) => {
     cy.get(ele).should('exist').and('be.visible').fill(data)
 })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// -- Url verification for expected result --
+Cypress.Commands.add('verifyUrlContains', (path) => {
+    cy.url().should('include', path);
+});
+
