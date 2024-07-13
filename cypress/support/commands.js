@@ -24,7 +24,7 @@ Cypress.Commands.add('userValidLogin', () => {
     cy.Inputelement(sel.emailField, credentials.validLogin.email);
     cy.Inputelement(sel.passwordField, credentials.validLogin.password);
     cy.ClickElement(sel.submit);
-    cy.verifyUrlContains('/account');
+    cy.verifyUrl('/account');
     cy.logout();
 })
 
@@ -35,7 +35,7 @@ Cypress.Commands.add('userInvalidLogin', () => {
     cy.Inputelement(sel.emailField, credentials.invalidLogin.email);
     cy.Inputelement(sel.passwordField, credentials.invalidLogin.password);
     cy.ClickElement(sel.submit);
-    cy.verifyUrlContains('/login');
+    cy.verifyUrl('/login');
 })
 
 // -- User clicks on the Login Button with empty fields --
@@ -45,13 +45,13 @@ Cypress.Commands.add('userEmptyLogin', () => {
     cy.Inputelement(sel.emailField, '');
     cy.Inputelement(sel.passwordField, '');
     cy.ClickElement(sel.submit);
-    cy.verifyUrlContains('/login');
+    cy.verifyUrl('/login');
 })
 
 // -- Logout Method --
 Cypress.Commands.add('logout', () => {
     cy.contains('Logout').click({force: true});
-    cy.verifyUrlContains('/logout');
+    cy.verifyUrl('/logout');
 })
 
 // -- This method clicks any button on the UI --
@@ -65,7 +65,7 @@ Cypress.Commands.add('Inputelement',(ele, data) => {
 })
 
 // -- Url verification for expected result --
-Cypress.Commands.add('verifyUrlContains', (path) => {
+Cypress.Commands.add('verifyUrl', (path) => {
     cy.url().should('include', path);
 });
 

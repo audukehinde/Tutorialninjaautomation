@@ -3,7 +3,7 @@ describe('User login', () => {
     beforeEach(() => {
         cy.visit('/');
     })
-
+    
     // -- User login with Valid Credentials  --
     it('Login with valid credentials', () => {
       cy.userValidLogin()
