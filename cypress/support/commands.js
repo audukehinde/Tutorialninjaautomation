@@ -50,7 +50,9 @@ Cypress.Commands.add('userEmptyLogin', () => {
 
 // -- Logout Method --
 Cypress.Commands.add('logout', () => {
-    cy.contains('Logout').click({force: true});
+    cy.ClickElement(sel.account_button);
+    cy.get('ul.dropdown-menu.dropdown-menu-right').should('be.visible')
+    .find('a').contains('Logout').click();
     cy.verifyUrl('/logout');
 })
 
