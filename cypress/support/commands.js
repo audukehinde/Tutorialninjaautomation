@@ -17,6 +17,23 @@ beforeEach(() => {
     });
 })
 
+// -- Create Account Method --
+
+Cypress.Commands.add('createAccount', () => {
+    cy.clickElement(sel.loginPage.account_button);
+    cy.get(sel.loginPage.login_button).should('exist').and('be.visible').contains('Register').click();
+    cy.Inputelement(sel.registerPage.first_name, "John");
+    cy.Inputelement(sel.registerPage.last_name, "Doe");
+    cy.Inputelement(sel.registerPage.email, "johnDoetestscript@yopmail.com");
+    cy.Inputelement(sel.registerPage.phone, "090343412357");
+    cy.Inputelement(sel.registerPage.password, "TutoScript@_45");
+    cy.Inputelement(sel.registerPage.conf_password, "TutoScript@_45");
+    cy.clickElement(sel.registerPage.subscribe);
+    cy.clickElement(sel.registerPage.policy);
+    cy.clickElement(sel.registerPage.continue);
+    cy.verifyUrl('account/success');
+})
+
 // -- Valid login method  --
 Cypress.Commands.add('userValidLogin', () => {
     cy.clickElement(sel.loginPage.account_button);

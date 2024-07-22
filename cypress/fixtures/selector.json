@@ -5,5 +5,17 @@
         "submit": "[type='submit']",
         "account_button": ".dropdown > .dropdown-toggle > .fa",
         "login_button": ".dropdown-menu-right"
+    },
+
+    "registerPage": {
+        "first_name": "#input-firstname",
+        "last_name": "#input-lastname",
+        "email": "#input-email",
+        "phone": "#input-telephone",
+        "password": "#input-password",
+        "conf_password": "#input-confirm",
+        "subscribe": ".col-sm-10 > :nth-child(1) > input",
+        "policy": "[type='checkbox']",
+        "continue": ".pull-right > .btn"
     }
 }
