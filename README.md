@@ -1,4 +1,4 @@
-# Saucedemo Web Application Test Automation
+# Tutorial Ninja Web Application Test Automation
 
 This project is a test automation suite built using Cypress. It includes a login test for the tutorial ninja web application. The following are the tested scenerios:
 
